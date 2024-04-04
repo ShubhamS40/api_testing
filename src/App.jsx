@@ -1,18 +1,23 @@
 import { useState,useEffect } from "react";
 
 function App() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  const apikey=String(import.meta.env.VITE_API_KEY)
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   const fetchData = async () => {
+    
+   
     try {
-      const response = await fetch('https://api.github.com/users/shubham2004-ux');
-      const jsonData = await  response.json(); 
-      setData(jsonData);
-      console.log("sucessfully");
+     
+     
+      const response = await fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=a00271610f9b4f9f8b398a3ea94e1c69`);
+      const jsonData = await  response.json() 
+      setData(jsonData.articles);
+      console.log(jsonData.articles);
       
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -20,11 +25,19 @@ function App() {
   };
 
   return (
+  
     <div>
-      <h1>Data from API</h1>
-       <h1>{data.name}</h1>
-       <h1>{data.bio}</h1>
-       <img src={data.avatar_url} alt="" />
+      <ul>
+        {data.map((item)=>{
+          return (
+            
+            <div>
+              <img height="100px" src={item.urlToImage} />
+            <li>{item.title}</li>
+            </div>
+          )
+        })}
+      </ul>
     </div>
   );
 }
