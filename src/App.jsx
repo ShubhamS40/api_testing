@@ -5,6 +5,7 @@ function App() {
   const [data, setData] = useState([]);
   const apikey=String(import.meta.env.VITE_API_KEY)
   const id=nanoid()
+  const apiKey='a00271610f9b4f9f8b398a3ea94e1c69'
 
   useEffect(() => {
     fetchData();
@@ -16,10 +17,10 @@ function App() {
     try {
      
      
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+      const response = await fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=${apiKey}`);
       const jsonData = await  response.json() 
-      setData(jsonData);
-      console.log(jsonData);
+      setData(jsonData.articles);
+      console.log(jsonData.articles);
       
     } catch (error) {
       console.error('Error fetching data:', error);
