@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, []);
 
   const fetchData = async () => {
     
@@ -16,10 +16,10 @@ function App() {
     try {
      
      
-      const response = await fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=a00271610f9b4f9f8b398a3ea94e1c69`);
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
       const jsonData = await  response.json() 
-      setData(jsonData.articles);
-      console.log(jsonData.articles);
+      setData(jsonData);
+      console.log(jsonData);
       
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -31,12 +31,7 @@ function App() {
     <div>
       <ul>
         {data.map((item)=>{
-          return (
-            
-            <div key={id}>
-            <li>{item.title}</li>
-            </div>
-          )
+          return <li key={id}>{item.title}</li>
         })}
       </ul>
     </div>
