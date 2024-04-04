@@ -1,8 +1,10 @@
 import { useState,useEffect } from "react";
+import { nanoid } from "nanoid";
 
 function App() {
   const [data, setData] = useState([]);
   const apikey=String(import.meta.env.VITE_API_KEY)
+  const id=nanoid()
 
   useEffect(() => {
     fetchData();
@@ -31,8 +33,7 @@ function App() {
         {data.map((item)=>{
           return (
             
-            <div>
-              <img height="100px" src={item.urlToImage} />
+            <div key={id}>
             <li>{item.title}</li>
             </div>
           )
